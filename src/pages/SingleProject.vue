@@ -1,20 +1,17 @@
 <template>
     <section v-if="project">
-        <h1>{{ project.name_proj }}</h1>
-        <img v-if="project.cover_image" :src="`${store.imagBasePath}${project.cover_image}`" class="card-img-top" :alt="project.name_proj">
-        <img v-else src="https://picsum.photos/id/20/1920/1080" class="card-img-top" :alt="project.name_proj">
-        <p>{{ project.name }}</p>
-        <div v-if="project.type">
-            <h5>Category: {{ project.category.worflow }}</h5>
+        <h1 class="text-capitalize">{{ project.name_proj }}</h1>
+        <div class="img-box">
+            <img v-if="project.cover_image" :src="`${store.imagBasePath}${project.cover_image}`" class="card-img-top" :alt="project.name_proj">
+            <img v-else src="https://picsum.photos/1200/600?random=1" class="card-img-top" :alt="project.name_proj">
         </div>
-        <div v-if="project.language && project.language.length > 0">
-            <h5>Tags</h5>
-            <div>
-                <span v-for="(language, index) in project.languages" :key="index" class="badge text-bg-info">{{ language.name }}</span>
-            </div>
-        </div>
+        <!-- <div><strong>Workflow:</strong> {{ project.type.workflow }}</div> -->
+        <div><strong>Framework:</strong> {{ project.dev_framework }}</div>
+        <div><strong>Livello Difficoltà:</strong> {{ project.lvl_dif }}</div>
+        <div><strong>Team:</strong> {{ project.team }}</div>
+        <div><strong>Link Github:</strong> {{ project.link_git }}</div>
+        <div><strong>Descrizione:</strong> {{ project.description }}</div>
     </section>
-    <section v-else>Loading...</section>
 </template>
 
 <script>

@@ -7,8 +7,8 @@
                     <img v-if="project.cover_image" :src="`${store.imagBasePath}${project.cover_image}`" class="card-img-top" :alt="project.name_proj">
                     <img v-else src="https://picsum.photos/1920/1080?random=1" class="card-img-top" :alt="project.name_proj">
                     <div class="card-body">
-                        <h5 class="card-title">{{ project.name_proj }}</h5>
-                        <p class="card-text">{{ truncateContent(project.description) }}</p>
+                        <h5 class="text-capitalize card-title">{{ project.name_proj }}</h5>
+                        <p class="card-text">{{ project.description }}</p>
                         <router-link class="btn btn-primary" :to="{ name: 'single-project', params: { slug: project.slug } }">
                             Vedi il project
                         </router-link>
@@ -19,7 +19,7 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item" v-for="n in lastPage"><a class="page-link" @click="getPosts(n)">{{ n }}</a></li>
+                <li class="page-item" v-for="n in lastPage"><a class="page-link" @click="getProject(n)">{{ n }}</a></li>
             </ul>
         </nav>
     </section>
@@ -41,7 +41,7 @@ export default {
         }
     },
     methods: {
-        getPosts(pagenum) {
+        getProject(pagenum) {
             axios.get(`${this.store.apiBaseUrl}/projects`, {
                 params: {
                     page: pagenum
@@ -62,7 +62,7 @@ export default {
         }
     },
     mounted() {
-        this.getPosts(1);
+        this.getProject(1);
     }
 }
 </script>
