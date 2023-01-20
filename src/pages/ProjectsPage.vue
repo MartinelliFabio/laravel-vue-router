@@ -3,18 +3,8 @@
         <h1>Lista dei Projects</h1>
         <div class="row mb-5">
             <div class="col-12 col-md-4" v-for="(project, index) in projects" :key="index">
-                <div class="card h-100" style="width: 18rem;">
-                    <img v-if="project.cover_image" :src="`${store.imagBasePath}${project.cover_image}`" class="card-img-top" :alt="project.name_proj">
-                    <img v-else src="https://picsum.photos/1920/1080?random=1" class="card-img-top" :alt="project.name_proj">
-                    <div class="card-body">
-                        <h5 class="text-capitalize card-title">{{ project.name_proj }}</h5>
-                        <p class="card-text">{{ project.description }}</p>
-                        <router-link class="btn btn-primary" :to="{ name: 'single-project', params: { slug: project.slug } }">
-                            Vedi il project
-                        </router-link>
-                    </div>
-                </div>
-            </div>
+                <CardComponent :project="project" />
+            </div> 
         </div>
         <nav aria-label="Page navigation example">
             <ul class="pagination">
@@ -28,8 +18,12 @@
 <script>
 import axios from 'axios';
 import { store } from '../store';
+import CardComponent from '../components/CardComponent.vue';
 export default {
-    name: 'ProjectsPage',
+    name: "ProjectsPage",
+    components: {
+        CardComponent
+    },
     data() {
         return {
             store,
@@ -38,7 +32,7 @@ export default {
             lastPage: null,
             total: 0,
             contentMaxLen: 100
-        }
+        };
     },
     methods: {
         getProject(pagenum) {
@@ -52,18 +46,19 @@ export default {
                 this.currentPage = response.data.results.current_page;
                 this.lastPage = response.data.results.last_page;
                 this.total = response.data.results.total;
-            })
+            });
         },
         truncateContent(text) {
             if (text.length > this.contentMaxLen) {
-                return text.substr(0, this.contentMaxLen) + '...';
+                return text.substr(0, this.contentMaxLen) + "...";
             }
             return text;
         }
     },
     mounted() {
         this.getProject(1);
-    }
+    },
+    components: { CardComponent }
 }
 </script>
 
