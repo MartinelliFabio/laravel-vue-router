@@ -2,7 +2,7 @@
     <section>
         <h1>Lista dei Projects</h1>
         <div class="row mb-5">
-            <div class="col-12 col-md-4" v-for="(project, index) in projects" :key="index">
+            <div class="col-12 col-md-4 g-5" v-for="(project, index) in projects" :key="index">
                 <CardComponent :project="project" />
             </div> 
         </div>
@@ -31,7 +31,6 @@ export default {
             currentPage: 1,
             lastPage: null,
             total: 0,
-            contentMaxLen: 100
         };
     },
     methods: {
@@ -48,17 +47,10 @@ export default {
                 this.total = response.data.results.total;
             });
         },
-        truncateContent(text) {
-            if (text.length > this.contentMaxLen) {
-                return text.substr(0, this.contentMaxLen) + "...";
-            }
-            return text;
-        }
     },
     mounted() {
         this.getProject(1);
     },
-    components: { CardComponent }
 }
 </script>
 

@@ -2,7 +2,7 @@
     <section v-if="project">
         <h1 class="text-capitalize">{{ project.name_proj }}</h1>
         <div class="img-box">
-            <img v-if="project.cover_image" :src="`${store.imagBasePath}${project.cover_image}`" class="card-img-top" :alt="project.name_proj">
+            <img v-if="project.cover_image" :src="`${store.imagBasePath}${project.cover_image}`" class="card-img-top single-img" :alt="project.name_proj">
             <img v-else src="https://picsum.photos/1200/600?random=1" class="card-img-top" :alt="project.name_proj">
         </div>
         <!-- <div><strong>Workflow:</strong> {{ project.type.workflow }}</div> -->
@@ -50,5 +50,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    
+    .single-img {
+        width: auto;
+        height: 600px;
+        background-size: contain;
+    }
 
 </style>
